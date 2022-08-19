@@ -61,8 +61,43 @@ pchisq(45.91, df=2, lower.tail=F)
 qchisq(0.05, df=2, lower.tail=F)
 
 # ==============================================================================
-page111
+
 # 5.2 독립성검정
+
+# 독립성검정
+# 두 범주형 변수가 서로 독립인지(두 변수가 서로 관련이 없는지) 검정
+# x^2검정 절차에 따라 두 변수의 범주 조합별 빈도를 기록한 교차표를 토대로 수행
+
+# ==============================================================================
+
+# 데이터
+str(Titanic)
+
+# 승객 구분에 따라 생존율 차이가 있는지 검정
+# margin.table(데이터셋, margin=교차표만들 열 선택)
+Titanic.margin<-margin.table(Titanic, margin=c(4,1))
+
+# 행과 열의 합, 열의비율 추가
+addmargins(Titanic.margin)
+addmargins(prop.table(addmargins(Titanic.margin, 2), 2), 1)
+
+# 독립성 검정
+chisq.test(Titanic.margin)
+# p값 매우 작으므로 귀무가설(승객구분과 생존여부는 관련없다) 기각
+
+# 관련성 강도 평가
+# vcd패키지 assocstats(): 지표들의 값이 클수록 관련성이 큼(Phi-Coefficient, Contingency Coeff, Cramer`s V`)
+library(vcd)
+assocstats(Titanic.margin)
+
+# 모자이크 도표(시각화)
+library(vcd)
+mosaic(Titanic.margin, shade=T, lengend=T)
+mosaic(~Survived+Class, data=Titanic.margin, shade=T, lengend=T)
+page115
+# ==============================================================================
+
+
 # ==============================================================================
 # ------------------------------------------------------------------------------
 

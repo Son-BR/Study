@@ -29,10 +29,10 @@
 
 # mapply(함수, 인자1, 인자2...)
 # sapply와 비슷하지만 여러개의 인자를 넘김
-
-
-
-
+library(tidyverse)
+library(tsibble)
+library(colorspace)
+library(gganimate)
 
 
 
